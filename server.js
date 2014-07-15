@@ -27,10 +27,6 @@ io.sockets.on('connection', function(socket) {
 
     usernames[username] = username;
 
-    socket.emit('servernotification', { connected: true, to_self: true, username: username });
-
-    socket.broadcast.emit('servernotification', { connected: true, username: username });
-
     io.sockets.emit('updateusers', usernames);
   });
 
@@ -40,7 +36,5 @@ io.sockets.on('connection', function(socket) {
     delete usernames[socket.username];
 
     io.sockets.emit('updateusers', usernames);
-
-    socket.broadcast.emit('servernotification', { username: socket.username });
   });
 });

@@ -41,14 +41,6 @@ ChatApp.setupSocketListeners = function() {
   this.socket.on('updateusers', function(users) {
     ChatApp.ui.refreshUsers(users)
   });
-
-  this.socket.on('servernotification', function (data) {
-    if(data.connected) {
-      ChatApp.ui.userConnected(data.username, !!data.to_self)
-    } else {
-      ChatApp.ui.userDisconnected(data.username)
-    }
-  });
 }
 
 ChatApp.setupDOMListeners = function(){

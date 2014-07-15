@@ -17,18 +17,6 @@ ChatApp.ui.refreshUsers = function(users) {
   });
 }
 
-ChatApp.ui.userConnected = function(user, isSelf){
-  if(isSelf) {
-    $('#conversation').append('connected: <a href="#"> you </a><br/>');
-  } else {
-    $('#conversation').append('connected: <a href="#">' + user + "</a><br/>");   
-  }
-}
-
-ChatApp.ui.userDisconnected = function(user) {
-  $('#conversation').append('disconnected: <a href="#">' + user + "</a><br/>");
-}
-
 ChatApp.ui.sendMessage = function(message) {
   $('#data').val('');
 }

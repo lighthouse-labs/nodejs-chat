@@ -17,30 +17,3 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-io.sockets.on('connection', function(socket) {
-  socket.on('sendchat', function (data) {
-    io.sockets.emit('updatechat', socket.username, data);
-  });
-
-  socket.on('adduser', function(username) {
-    socket.username = username;
-
-    usernames[username] = username;
-
-    socket.emit('servernotification', { connected: true, to_self: true, username: username });
-
-    socket.broadcast.emit('servernotification', { connected: true, username: username });
-
-    io.sockets.emit('updateusers', usernames);
-  });
-
-  // when the user disconnects.. perform this
-  socket.on('disconnect', function(){
-
-    delete usernames[socket.username];
-
-    io.sockets.emit('updateusers', usernames);
-
-    socket.broadcast.emit('servernotification', { username: socket.username });
-  });
-});
